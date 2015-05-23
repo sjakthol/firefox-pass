@@ -8,6 +8,7 @@ let panel = module.exports = Panel({
   contentURL: "./selector-panel.html",
   contentScriptFile: "./selector-panel.js",
   onShow: () => {
+    panel.port.emit("about-to-select");
     Pass.listPasswords()
       .then(items => {
         panel.port.emit("select", items, getActiveTabDomain());

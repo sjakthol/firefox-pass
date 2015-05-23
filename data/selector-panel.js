@@ -3,7 +3,18 @@
 
   let list = document.querySelector(".item-list");
   let filter = document.querySelector(".filter");
+  let aboutToSelectTimeout = null;
   filter.addEventListener("input", filterItems);
+
+  self.port.on("about-to-select", function() {
+    if (aboutToSelectTimeout) {
+      clearTimeout(aboutToSelectTimeout);
+    }
+
+    aboutToSelectTimeout = setTimeout(() => {
+      showView("loading");
+    }, 50);
+  });
 
   self.port.on("select", populatePanel);
   self.port.on("reset", reset);
@@ -50,7 +61,12 @@
       item.remove();
     }
 
-    showView("loading");
+    if (aboutToSelectTimeout) {
+      clearTimeout(aboutToSelectTimeout);
+      aboutToSelectTimeout = null;
+    }
+
+    showView("empty");
   }
 
   function showView(view) {
