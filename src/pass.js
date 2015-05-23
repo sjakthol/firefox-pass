@@ -2,8 +2,25 @@
 
 const { spawn } = require("sdk/system/child_process");
 const { env } = require('sdk/system/environment');
+const { notify } = require("sdk/notifications");
+const { get: _ } = require("sdk/l10n");
 
 module.exports = {
+  /**
+   * Copies the password @param item to clipboard.
+   *
+   * @param {String} item - The password item to copy.
+   */
+  copyToClipboard: function(item) {
+    this._spawn(["-c", item])
+      .catch(() => {
+        notify({
+          title: _("ui.notify.error.title"),
+          text: _("ui.notify.error.body", item),
+        });
+      });
+  },
+
   /**
    * Test if the pass utility is installed and configured.
    *
@@ -43,8 +60,10 @@ module.exports = {
       let stderr = "";
       let process = spawn("/usr/bin/pass", parameters || [], {
         env: {
-          "PATH": env.PATH,
-          "HOME": env.HOME,
+          GPG_AGENT_INFO: env.GPG_AGENT_INFO,
+          DISPLAY: env.DISPLAY,
+          PATH: env.PATH,
+          HOME: env.HOME,
         }
       });
 

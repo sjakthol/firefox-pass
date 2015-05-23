@@ -23,7 +23,7 @@ let panel = module.exports = Panel({
 
 panel.port.on("item-selected", item => {
   panel.hide();
-  console.log("Selected " + item);
+  Pass.copyToClipboard(item);
 });
 
 function getActiveTabDomain() {
