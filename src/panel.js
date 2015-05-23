@@ -13,7 +13,7 @@ let panel = module.exports = Panel({
       .then(items => {
         panel.port.emit("select", items, getActiveTabDomain());
       }).catch(err => {
-        panel.port.emit("error");
+        panel.port.emit("list-error");
       });
   },
 
@@ -23,8 +23,10 @@ let panel = module.exports = Panel({
 });
 
 panel.port.on("item-selected", item => {
-  panel.hide();
-  Pass.copyToClipboard(item);
+  Pass.copyToClipboard(item)
+    .catch(() => {
+      panel.port.emit("copy-error");
+    });
 });
 
 function getActiveTabDomain() {

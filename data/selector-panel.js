@@ -18,7 +18,8 @@
 
   self.port.on("select", populatePanel);
   self.port.on("reset", reset);
-  self.port.on("error", showView.bind(null, "error"));
+  self.port.on("list-error", showView.bind(null, "list-error"));
+  self.port.on("copy-error", showView.bind(null, "copy-error"));
 
   function populatePanel(items, domain) {
     // Reset the dialog in case something has gone wrong.
@@ -54,6 +55,11 @@
 
   function onItemSelected(ev) {
     self.port.emit("item-selected", ev.target.textContent);
+
+    // Immediately show the copy-success view as the command will sleep for 45
+    // seconds if the password is copied successfully to the clipboard. If an
+    // error occurs, this will flicker a little but it's good enough for now.
+    showView("copy-success");
   }
 
   function reset() {
@@ -61,15 +67,14 @@
       item.remove();
     }
 
-    if (aboutToSelectTimeout) {
-      clearTimeout(aboutToSelectTimeout);
-      aboutToSelectTimeout = null;
-    }
-
     showView("empty");
   }
 
   function showView(view) {
+    if (aboutToSelectTimeout) {
+      clearTimeout(aboutToSelectTimeout);
+      aboutToSelectTimeout = null;
+    }
     document.querySelector(".view-active").classList.remove("view-active");
     document.querySelector("[data-view='" + view + "']").classList.add("view-active");
   }

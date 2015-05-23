@@ -4,6 +4,7 @@ const { spawn } = require("sdk/system/child_process");
 const { env } = require('sdk/system/environment');
 const { notify } = require("sdk/notifications");
 const { get: _ } = require("sdk/l10n");
+const { setTimeout } = require("sdk/timers");
 
 module.exports = {
   /**
@@ -12,13 +13,7 @@ module.exports = {
    * @param {String} item - The password item to copy.
    */
   copyToClipboard: function(item) {
-    this._spawn(["-c", item])
-      .catch(() => {
-        notify({
-          title: _("ui.notify.error.title"),
-          text: _("ui.notify.error.body", item),
-        });
-      });
+    return this._spawn(["-c", item]);
   },
 
   /**
