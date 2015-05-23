@@ -23,6 +23,7 @@
 
     filter.value = domain;
     filterItems();
+    filter.focus();
 
     // Show the list.
     showView("select");
@@ -32,7 +33,7 @@
     let value = filter.value;
     for (let item of list.querySelectorAll("li")) {
       let iv = item.textContent;
-      if (iv.includes(value)) {
+      if (iv.contains(value)) {
         item.classList.remove("hidden");
       } else {
         item.classList.add("hidden");
