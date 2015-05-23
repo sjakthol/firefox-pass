@@ -56,6 +56,11 @@ module.exports = {
           if (status === 0) {
             resolve(stdout);
           } else {
+            console.error("pass exited with code " + status);
+            console.log("stdout:");
+            console.log(stdout);
+            console.log("stderr:");
+            console.log(stderr);
             reject(stderr);
           }
         });
