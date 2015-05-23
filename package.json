@@ -4,7 +4,10 @@
   "version": "0.0.1",
   "description": "An add-on for accessing the pass password manager directly from Firefox.",
   "main": "index.js",
-  "author": "Sami Jaktholm <sjakthol@outlook.com>",
+  "author": {
+    "name": "Sami Jaktholm",
+    "email": "sjakthol@outlook.com"
+  },
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
