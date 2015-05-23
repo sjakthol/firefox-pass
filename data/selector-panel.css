@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.view {
+  display: none;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.view-active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.filter {
+  border: 1px solid #B2AEAA;
+  border-radius: 2px;
+  margin: 0;
+  padding: 1px 5px;
+  width: 100%;
+}
+
+.filter:focus {
+  border-color: #f07746;
+}
+
+.item-list {
+  background: white;
+  border: 1px solid #B2AEAA;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.item-list li {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.item-list li:hover {
+  background: #e3e3e3;
+}
