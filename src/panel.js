@@ -1,3 +1,5 @@
+"use strict";
+
 const { Panel } = require("sdk/panel");
 const tabs = require("sdk/tabs");
 const { URL } = require("sdk/url");
