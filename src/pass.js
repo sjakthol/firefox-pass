@@ -15,6 +15,20 @@ module.exports = {
   },
 
   /**
+   * Retrieves an updated list of passwords from 'pass'.
+   *
+   * @returns Promise - A promise that resolves with an array of item names or
+   * rejects if an error occurs.
+   */
+  listPasswords: function() {
+    return this._spawn().then(output => {
+      return output.split("\n")
+        .filter(item => item.startsWith("|-- ")) // only take the toplevel items
+        .map(item => item.split("|-- ")[1]);
+    });
+  },
+
+  /**
    * Spawns the pass utility with given parameters.
    *
    * @param {Array} parameters - The command line parameters to call 'pass' with.
