@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  /* jshint browser:true */
+  /* global self */
+
   let list = document.querySelector(".item-list");
   let filter = document.querySelector(".filter");
   let aboutToSelectTimeout = null;
