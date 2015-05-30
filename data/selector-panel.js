@@ -21,6 +21,15 @@
   self.port.on("list-error", showView.bind(null, "list-error"));
   self.port.on("copy-error", showView.bind(null, "copy-error"));
 
+  filter.addEventListener("keypress", event => {
+    if (window.KeyEvent.DOM_VK_RETURN === event.keyCode) {
+      let visible = document.querySelectorAll(".item-list > li:not(.hidden)");
+      if (visible.length === 1) {
+        visible[0].click();
+      }
+    }
+  });
+
   function populatePanel(items, domain) {
     // Reset the dialog in case something has gone wrong.
     reset();
