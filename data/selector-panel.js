@@ -47,7 +47,9 @@
 
     filter.value = domain;
     filterItems();
-    filter.focus();
+    setTimeout(() => {
+      filter.focus();
+    }, 10);
 
     // Show the list.
     showView("select");
